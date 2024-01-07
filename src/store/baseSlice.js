@@ -46,7 +46,7 @@ export const baseSlice = createSlice({
       })
       builder.addCase(AddUser.fulfilled, (state, actions) => {
         console.log(actions.payload)
-        state.users.userData.push(actions.payload)
+        // state.users.userData.push(actions.payload)
       })
   }
 });
