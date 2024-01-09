@@ -13,7 +13,7 @@ export const AddUser = createAsyncThunk(
   "AddUser",
   async ({ userName, password }) => {
    try {
-    const response = await axios.post("http://localhost:3000/auth", {
+    const response = await axios.post("https://budget-server-rdid.onrender.com/auth", {
       user: {
         userName: userName,
         userPassword: password
