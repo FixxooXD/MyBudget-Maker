@@ -6,10 +6,9 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { addUser } from "../../store/baseSlice";
 import { useNavigate } from "react-router-dom";
 import { AddUser } from "../../store/baseSlice";
-
+import { useSelector } from "react-redux";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -33,7 +32,7 @@ export const Signup = () => {
   const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -55,40 +54,54 @@ export const Signup = () => {
     setValidMatch(match);
   }, [pwd, matchPwd]);
 
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd, matchPwd]);
+
+
+  let isLoading = useSelector((state) => state.user.isLoading);
+  let isError = useSelector((state) => state.user.isError);
+  let isSucess = useSelector((state) => state.user.isSucess);
+
+
+  console.log(isLoading)
+  console.log(isError)
+
+  // useEffect(() => {
+  //   setErrMsg("");
+  // }, [user, pwd, matchPwd]);
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccess(true);
     dispatch(
       AddUser({
         userName: user,
         password: pwd,
       })
     );
-    navigate("/auth/login");
+
+    isSucess ? navigate("/auth/login") : null
   };
 
   return (
-    <div className="flex justify-center mx-2">
-      <section>
-        <p
-          ref={errRef}
-          //   Only IF you have something as a CSS class
-          //   className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive">
-          {errMsg}
-        </p>
-      </section>
+    <div className="relative flex flex-col items-center mx-2">
+      {isError ? (
+        <section className="absolute px-5 h-[2rem] mt-[5rem] border-2">
+          <div
+            ref={errRef}
+            className="flex justify-center items-center"
+            //   Only IF you have something as a CSS class
+            //   className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive">
+            {/* {errMsg} */}
+            {console.log(errMsg)}
+            <h1>{isError}</h1>
+          </div>
+        </section>
+      ) : null}
 
-      {success ? (
+      {isLoading ? (
         <>
-          <span>GetLogin</span>
-          <h1>{user}</h1>
+         <h1>Loading....</h1>
         </>
       ) : (
         <>
