@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/baseSlice";
+import { Loading } from "./Loading";
 
 
 
@@ -10,6 +11,8 @@ const Login = () => {
 
   const [inputUser, setInputUser] = useState("")
   const [inputPwd, setInputPwd] = useState("");
+
+  const [isLoadingg, setIsLoading] = useState(true);
 
 
   const userRef = useRef();
@@ -42,11 +45,23 @@ const Login = () => {
         password: inputPwd,
        }))  
 
+      //  setTimeout(() => {
+      //   setIsLoading(false);
+      // }, 2000);
+
        setTimeout(() => {
         navigate('/success')
-      }, "100");
+      }, "1000");
     
   };
+
+  useEffect(() => {
+    // Simulate an API call
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
 
 
   return (
@@ -65,10 +80,8 @@ const Login = () => {
       </section>
     ) : null}
    
-   {isLoading ? (
-        <>
-         <h1>Loading....</h1>
-        </>
+   {isLoadingg ? (
+       <Loading />
       ) : (
     <form
       onSubmit={handleSubmit}

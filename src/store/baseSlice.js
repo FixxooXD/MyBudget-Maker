@@ -106,6 +106,7 @@ export const baseSlice = createSlice({
         state.isError = null
         state.authenticated = true
         console.log(actions.payload)
+        state.users.userData.push(actions.payload)
         }
         // state.users.userData.push(actions.payload)
       })
