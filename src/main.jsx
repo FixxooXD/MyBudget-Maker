@@ -8,6 +8,8 @@ import {Signup} from './components/Pages/Signup';
 import { Provider } from 'react-redux';
 import store from "./store/store"
 import Login from './components/Pages/Login';
+import { Success } from './components/Pages/Success';
+import ProtectedRoues from './components/Pages/ProtectedRoues';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -15,6 +17,7 @@ const router = createBrowserRouter(
         <Route index element={<Root />} />
         <Route path='/auth' element={<Signup />} />
         <Route path='/auth/login' element={<Login />} />
+        <Route path='/success' element={<ProtectedRoues Component={Success} />} />
       </Route>
     )
   );

@@ -63,6 +63,7 @@ export const Signup = () => {
 
   console.log(isLoading)
   console.log(isError)
+  console.log(isSucess);
 
   // useEffect(() => {
   //   setErrMsg("");
@@ -79,7 +80,7 @@ export const Signup = () => {
       })
     );
 
-    isSucess ? navigate("/auth/login") : null
+    !isSucess ? navigate("/auth/login") : null
   };
 
   return (
