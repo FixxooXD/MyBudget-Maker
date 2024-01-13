@@ -44,11 +44,6 @@ const Login = () => {
         userName: inputUser,
         password: inputPwd,
        }))  
-
-      //  setTimeout(() => {
-      //   setIsLoading(false);
-      // }, 2000);
-
        setTimeout(() => {
         navigate('/success')
       }, "1000");

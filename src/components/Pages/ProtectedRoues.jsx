@@ -10,7 +10,7 @@ const ProtectedRoues = (props) => {
 
      useEffect(() => {
        if(!isAuthenticated){
-         navigate("auth/login")
+         navigate("/auth/login")
        }
      })
   return (
